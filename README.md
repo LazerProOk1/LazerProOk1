@@ -1,33 +1,22 @@
 <div align="center">
 
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=28&pause=1500&color=58A6FF&center=true&vCenter=true&width=200&lines=hi!" alt="hi!" /><br/>
-
-<img src="https://img.shields.io/github/stars/LazerProOk1?affiliations=OWNER%2CCOLLABORATOR%2CORGANIZATION_MEMBER&style=flat-square&label=%E2%AD%90%20stars&color=58a6ff" />
-<img src="https://img.shields.io/github/followers/LazerProOk1?style=flat-square&label=followers&color=58a6ff" />
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/card-dark.svg" />
+  <img src="assets/card-light.svg" alt="hi!" width="100%" />
+</picture>
 
 <br/><br/>
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=py%2Ccpp%2Cjava%2Cts%2Creact%2Cvite%2Cfastapi%2Cflask%2Cpostgres%2Clua%2Cgit%2Cdocker&theme=dark&perline=12" />
-  <img src="https://skillicons.dev/icons?i=py%2Ccpp%2Cjava%2Cts%2Creact%2Cvite%2Cfastapi%2Cflask%2Cpostgres%2Clua%2Cgit%2Cdocker&theme=light&perline=12" alt="stack" />
-</picture>
-
-<br/><br/>
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="profile-summary-card-output/github_dark/3-stats.svg" />
-  <img src="profile-summary-card-output/github/3-stats.svg" width="49%" alt="stats" />
-</picture>
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="profile-summary-card-output/github_dark/1-repos-per-language.svg" />
-  <img src="profile-summary-card-output/github/1-repos-per-language.svg" width="49%" alt="languages" />
+  <img src="https://skillicons.dev/icons?i=py%2Ccpp%2Cjava%2Cts%2Creact%2Cvite%2Cfastapi%2Cflask%2Cpostgres%2Clua%2Cgit%2Cdocker&theme=light&perline=12" alt="stack" width="90%" />
 </picture>
 
 <br/><br/>
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/LazerProOk1/LazerProOk1/output/snake-dark.svg" />
-  <img alt="snake" src="https://raw.githubusercontent.com/LazerProOk1/LazerProOk1/output/snake.svg" />
+  <img alt="snake" src="https://raw.githubusercontent.com/LazerProOk1/LazerProOk1/output/snake.svg" width="100%" />
 </picture>
 
 </div>
