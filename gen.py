@@ -1,4 +1,4 @@
-"""Renders assets/card-{dark,light}.svg from public GitHub data. Run by .github/workflows/cards.yml."""
+"""Languages include private repos when the token can see them (STATS_TOKEN). Renders assets/card-{dark,light}.svg from public GitHub data. Run by .github/workflows/cards.yml."""
 import json, os, urllib.request
 from collections import Counter
 from html import escape
@@ -9,8 +9,8 @@ SKIP_LANGS = {"HTML", "CSS", "SCSS", "Dockerfile", "NSIS", "Jupyter Notebook", "
 QUERY = """query($login:String!){ user(login:$login){
   repositoriesContributedTo(first:1, contributionTypes:[COMMIT,PULL_REQUEST,ISSUE,REPOSITORY]){totalCount}
   contributionsCollection{ totalCommitContributions restrictedContributionsCount }
-  repositories(first:100, ownerAffiliations:[OWNER,COLLABORATOR,ORGANIZATION_MEMBER], privacy:PUBLIC){ nodes{
-    isFork stargazerCount owner{login}
+  repositories(first:100, ownerAffiliations:[OWNER,COLLABORATOR,ORGANIZATION_MEMBER]){ nodes{
+    isFork isPrivate stargazerCount owner{login}
     languages(first:10, orderBy:{field:SIZE,direction:DESC}){ edges{ size node{name color} } } } } } }"""
 
 
@@ -36,14 +36,15 @@ def stats(u):
             if name not in SKIP_LANGS:
                 sizes[name] += e["size"]
                 colors[name] = e["node"]["color"] or "#8b949e"
+    pub = [r for r in repos if not r["isPrivate"]]
     total = sum(sizes.values()) or 1
-    langs = [(n, s / total, colors[n]) for n, s in sizes.most_common(6) if s / total >= .01]
+    langs = [(n, s / total, colors[n]) for n, s in sizes.most_common(7) if s / total >= .01]
     cc = u["contributionsCollection"]
     return {
         "nums": [
-            ("stars", sum(r["stargazerCount"] for r in repos)),
+            ("stars", sum(r["stargazerCount"] for r in pub)),
             ("commits this year", cc["totalCommitContributions"] + cc["restrictedContributionsCount"]),
-            ("repos", len(own)),
+            ("repos", sum(not r["isPrivate"] for r in own)),
             ("contributed to", u["repositoriesContributedTo"]["totalCount"]),
         ],
         "langs": langs,
