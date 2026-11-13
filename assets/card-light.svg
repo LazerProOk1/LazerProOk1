@@ -13,7 +13,7 @@ text{font-family:'Segoe UI',Ubuntu,'Helvetica Neue',sans-serif}
 <text x="40" y="112" font-size="64" font-weight="800" fill="url(#g)">hi!</text>
 <rect class="c" x="148" y="64" width="5" height="52" rx="2" fill="#58a6ff"/>
 <g class="f" style="animation-delay:0.00s"><text x="250.0" y="92" font-size="34" font-weight="700" fill="#1f2328">18</text><text x="250.0" y="116" font-size="13" fill="#656d76">stars</text></g>
-<g class="f" style="animation-delay:0.15s"><text x="392.5" y="92" font-size="34" font-weight="700" fill="#1f2328">476</text><text x="392.5" y="116" font-size="13" fill="#656d76">commits this year</text></g>
+<g class="f" style="animation-delay:0.15s"><text x="392.5" y="92" font-size="34" font-weight="700" fill="#1f2328">478</text><text x="392.5" y="116" font-size="13" fill="#656d76">commits this year</text></g>
 <g class="f" style="animation-delay:0.30s"><text x="535.0" y="92" font-size="34" font-weight="700" fill="#1f2328">8</text><text x="535.0" y="116" font-size="13" fill="#656d76">repos</text></g>
 <g class="f" style="animation-delay:0.45s"><text x="677.5" y="92" font-size="34" font-weight="700" fill="#1f2328">3</text><text x="677.5" y="116" font-size="13" fill="#656d76">contributed to</text></g>
 <rect x="40" y="168" width="780" height="8" rx="4" fill="#eaeef2"/><g clip-path="url(#bar)">
