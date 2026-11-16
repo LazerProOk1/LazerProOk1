@@ -6,11 +6,12 @@ from html import escape
 
 LOGIN = os.environ.get("LOGIN", "LazerProOk1")
 NOTE = "i build small things."  # edit me
-SKIP_LANGS = {"HTML", "CSS", "SCSS", "Dockerfile", "NSIS", "Jupyter Notebook", "Makefile", "Batchfile", "Shell", "PowerShell", "GLSL", "GDShader"}
+SKIP_LANGS = {"HTML", "CSS", "SCSS", "Dockerfile", "NSIS", "Jupyter Notebook", "Makefile", "Batchfile", "Shell", "PowerShell", "GLSL", "GDShader", "GDScript", "Typst"}
 
 QUERY = """query($login:String!){ user(login:$login){
-  contributionsCollection{ totalCommitContributions restrictedContributionsCount }
-  recent: repositories(first:3, ownerAffiliations:[OWNER], privacy:PUBLIC, isFork:false, orderBy:{field:PUSHED_AT,direction:DESC}){ nodes{ name } }
+  contributionsCollection{ totalCommitContributions restrictedContributionsCount
+    commitContributionsByRepository(maxRepositories:25){ repository{ name nameWithOwner isPrivate owner{login} }
+      contributions(first:1, orderBy:{field:OCCURRED_AT,direction:DESC}){ nodes{ occurredAt } } } }
   repositories(first:100, ownerAffiliations:[OWNER,COLLABORATOR,ORGANIZATION_MEMBER]){ nodes{
     isFork isPrivate stargazerCount owner{login}
     languages(first:10, orderBy:{field:SIZE,direction:DESC}){ edges{ size node{name} } } } } } }"""
@@ -41,7 +42,12 @@ def stats(u):
                 sizes[e["node"]["name"]] += e["size"]
     total = sum(sizes.values()) or 1
     cc = u["contributionsCollection"]
-    recent = [r["name"] for r in u["recent"]["nodes"] if r["name"] != LOGIN]
+    # latest public repo you committed to (yours or someone else's), private names never shown
+    recent = sorted(
+        ((c["contributions"]["nodes"][0]["occurredAt"], c["repository"]) for c in cc["commitContributionsByRepository"]
+         if c["contributions"]["nodes"] and not c["repository"]["isPrivate"] and c["repository"]["nameWithOwner"] != f"{LOGIN}/{LOGIN}"),
+        key=lambda x: x[0], reverse=True)
+    recent = [r["name"] if r["owner"]["login"] == LOGIN else r["nameWithOwner"] for _, r in recent]
     return {
         "langs": [(n.lower(), s / total) for n, s in sizes.most_common(6) if s / total >= .01],
         "nums": [
