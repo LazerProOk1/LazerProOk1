@@ -33,7 +33,9 @@ def stats(u):
     pub = [r for r in repos if not r["isPrivate"]]
     own = [r for r in repos if r["owner"]["login"] == LOGIN and not r["isFork"]]
     sizes = Counter()
-    for r in own:
+    for r in repos:  # own + collaborator repos; private ones only with STATS_TOKEN
+        if r["isFork"]:
+            continue
         for e in r["languages"]["edges"]:
             if e["node"]["name"] not in SKIP_LANGS:
                 sizes[e["node"]["name"]] += e["size"]
